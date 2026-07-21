@@ -169,8 +169,13 @@
     }
 
     @media(max-width:720px) {
-      .navlinks {
+      .navlinks > a {
         display: none;
+      }
+      .navlinks .lang {
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
       }
     }
 
@@ -1009,6 +1014,23 @@
       border-color: var(--ink);
       transform: translate(-3px, -3px);
       box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    @media(max-width: 500px) {
+      .hero-cta {
+        flex-direction: column;
+      }
+      .hero-cta a {
+        text-align: center;
+        width: 100%;
+      }
+      .contact-links {
+        flex-direction: column;
+      }
+      .contact-links a {
+        text-align: center;
+        width: 100%;
+      }
     }
 
     footer {
