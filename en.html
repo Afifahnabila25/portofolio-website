@@ -7,7 +7,7 @@
   <title>Afifah Nabila Devi | Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -324,7 +324,7 @@
       background: var(--grape-soft);
       border: 4px solid var(--ink);
       box-shadow: 10px 10px 0 var(--pink);
-      transform: rotate(-2deg);
+      transform: perspective(800px) rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg)) rotate(-2deg);
     }
 
     .scene .frame img {
@@ -464,20 +464,23 @@
     /* SECTION */
     .sec {
       padding: 60px 0;
-      border-top: 2px dashed var(--line);
+      border-top: 2px dashed #c9b8f5;
     }
 
     .sec-tag {
       display: inline-block;
       font-size: 12.5px;
-      font-weight: 700;
-      color: var(--grape);
+      font-weight: 800;
+      color: #fff;
       text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 12px;
-      background: var(--grape-soft);
-      padding: 6px 14px;
+      letter-spacing: .08em;
+      margin-bottom: 14px;
+      background: var(--grape);
+      padding: 7px 16px;
       border-radius: 100px;
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      rotate: -2deg;
     }
 
     .sec h2 {
@@ -1043,6 +1046,249 @@
       font-size: 12px;
       color: var(--ink-dim);
     }
+
+    /* ===== Langit bintang interaktif ===== */
+    #sky {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .sticker {
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      animation: bob 4s ease-in-out infinite;
+      transition: box-shadow .2s, scale .2s;
+    }
+
+    .s2 {
+      animation-delay: -1.3s;
+    }
+
+    .s3 {
+      animation-delay: -2.6s;
+    }
+
+    .sticker:hover {
+      scale: 1.06;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .sticker.dragging {
+      cursor: grabbing;
+      animation-play-state: paused;
+      scale: 1.12;
+      box-shadow: 7px 7px 0 var(--ink);
+      z-index: 10;
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        translate: 0 0;
+      }
+
+      50% {
+        translate: 0 -8px;
+      }
+    }
+
+    .scene .frame {
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sticker {
+        animation: none;
+      }
+    }
+
+    /* ===== Terminal mini ===== */
+    .term {
+      margin-top: 28px;
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 8px 8px 0 var(--grape);
+      background: #1b1030;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .term-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--ink);
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .term-bar i {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #0d0718;
+    }
+
+    .term-bar i:nth-child(1) {
+      background: var(--pink);
+    }
+
+    .term-bar i:nth-child(2) {
+      background: var(--yellow);
+    }
+
+    .term-bar i:nth-child(3) {
+      background: var(--sky);
+    }
+
+    .term-bar span {
+      margin-left: 8px;
+      font-size: 12.5px;
+      color: #b9a8e0;
+    }
+
+    .term-body {
+      height: 270px;
+      overflow-y: auto;
+      padding: 16px 18px;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #e9e2ff;
+      cursor: text;
+    }
+
+    .term-line {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .term-line a {
+      color: var(--sky);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .term-line b {
+      color: #fff;
+    }
+
+    .term-line.err {
+      color: #ff8db6;
+    }
+
+    .term .dim {
+      color: #8f82ad;
+    }
+
+    .term .c-pink {
+      color: var(--pink);
+    }
+
+    .term .c-sky {
+      color: var(--sky);
+    }
+
+    .term .c-yellow {
+      color: var(--yellow);
+    }
+
+    .term .c-grape {
+      color: #b48bff;
+    }
+
+    .term-prompt {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .term-inputline {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .term-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font: inherit;
+      caret-color: var(--pink);
+    }
+
+    .term-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 2px dashed #3a2a5c;
+    }
+
+    .term-chips span {
+      font-size: 12px;
+      color: #8f82ad;
+      align-self: center;
+    }
+
+    .term-chips button {
+      font: 600 12px 'JetBrains Mono', monospace;
+      color: var(--ink);
+      background: var(--yellow);
+      border: 2px solid #0d0718;
+      border-radius: 100px;
+      padding: 5px 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #0d0718;
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .term-chips button:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 #0d0718;
+    }
+
+    .term-chips button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 #0d0718;
+    }
+
+    /* ===== Foto bisa dibalik ===== */
+    .flip-tag {
+      position: absolute;
+      right: 4%;
+      bottom: 0;
+      z-index: 6;
+      translate: 0 10px;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      font: 700 12.5px 'Familjen Grotesk', sans-serif;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 3px 3px 0 var(--pink);
+      transition: opacity .25s, translate .25s;
+    }
+
+    .flip-tag.show {
+      opacity: 1;
+      translate: 0 0;
+    }
   </style>
 </head>
 
@@ -1144,6 +1390,24 @@
           <div class="fact"><b>2027</b><span>Expected graduation</span></div>
         </div>
 
+      </div>
+      <div class="term reveal" id="term">
+        <div class="term-bar"><i></i><i></i><i></i><span>guest@afifah: ~</span></div>
+        <div class="term-body">
+          <div class="term-out"></div>
+          <div class="term-inputline">
+            <span class="term-prompt">guest@afifah:~$</span>
+            <input class="term-input" type="text" aria-label="Type a terminal command" autocomplete="off"
+              autocapitalize="off" spellcheck="false">
+          </div>
+        </div>
+        <div class="term-chips">
+          <span>try:</span>
+          <button data-cmd="help">help</button>
+          <button data-cmd="skills">skills</button>
+          <button data-cmd="projects">projects</button>
+          <button data-cmd="contact">contact</button>
+        </div>
       </div>
     </section>
     <section class="sec" id="projects">
@@ -1391,7 +1655,16 @@
       <h2 class="reveal">Where I learn and grow</h2>
       <div class="exp-list reveal">
         <div class="exp">
-          <div class="meta">PT Telkom Indonesia · June 2026 - Present</div>
+          <div class="meta">DOT Indonesia · November 2026 - Present · Hybrid, Malang</div>
+          <h4>AI Engineer Intern</h4>
+        </div>
+        <div class="exp">
+          <div class="meta">Asah led by Dicoding · August 2026 - Present · Remote</div>
+          <h4>Next-Gen AI Engineer Trainee, ASAH Program</h4>
+          <p>Taking the intensive Next-Gen AI Engineer learning path to build industry-relevant AI skills.</p>
+        </div>
+        <div class="exp">
+          <div class="meta">PT Telkom Indonesia · June 2026 - September 2026</div>
           <h4>QA Intern, PaDiUMKM</h4>
           <p>Wrote test cases and BDD scenarios for a live B2B e-commerce platform, covering web and mobile.</p>
         </div>
@@ -1402,7 +1675,7 @@
             development.</p>
         </div>
         <div class="exp">
-          <div class="meta">LPM FILKOM · January 2026, Present</div>
+          <div class="meta">LPM FILKOM · January 2026 - July 2026</div>
           <h4>Head of Activation, Publication & Information</h4>
           <p>Managed the organization's digital ecosystem and executed data-driven promotion strategies to increase the
             organic reach of journalistic content.</p>
@@ -1479,6 +1752,9 @@
     }
   </script>
 
+  <script src="stars.js" defer></script>
+  <script src="terminal.js" defer></script>
+  <script src="photo-flip.js" defer></script>
 </body>
 
 </html>
