@@ -1,0 +1,110 @@
+/* Mode malam. Aktif kalau <html data-theme="dark">, tombolnya diatur di theme.js */
+
+html[data-theme="dark"] {
+  --bg: #0d0a16;
+  --card: #181226;
+  --ink: #f1ecff;
+  --ink-dim: #a99fc2;
+  --line: #2c2342;
+  --pink-soft: #3b1229;
+  --yellow-soft: #3a2d0b;
+  --grape-soft: #281a4d;
+  --sky-soft: #0b3136;
+  --dark: #0d0a16;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] nav {
+  background: rgba(13, 10, 22, .82);
+}
+
+/* yang dulu latar gelap + teks putih, sekarang latar terang + teks gelap */
+html[data-theme="dark"] .lang a.active,
+html[data-theme="dark"] .btn.solid,
+html[data-theme="dark"] .tabbtn.active,
+html[data-theme="dark"] .contact-links a.solid,
+html[data-theme="dark"] .flip-tag {
+  color: var(--dark);
+}
+
+/* label berlatar kuning/tosca: teks tetap gelap biar kebaca */
+html[data-theme="dark"] .badge,
+html[data-theme="dark"] .contact-block .sec-tag,
+html[data-theme="dark"] .exp:nth-child(4n+1) .meta,
+html[data-theme="dark"] .exp:nth-child(4n+3) .meta,
+html[data-theme="dark"] .contact-links a:not(.solid):hover,
+html[data-theme="dark"] .term-chips button {
+  color: var(--dark);
+}
+
+/* yang dulu latar putih (state hover/aktif dikecualikan supaya warna aslinya tetap jalan) */
+html[data-theme="dark"] .btn.ghost:not(:hover),
+html[data-theme="dark"] .sticker,
+html[data-theme="dark"] .chip-sm,
+html[data-theme="dark"] .tabbtn:not(.active):not(:hover),
+html[data-theme="dark"] .projects-more a:hover,
+html[data-theme="dark"] .contact-links a:not(.solid):not(:hover) {
+  background: var(--card);
+}
+
+html[data-theme="dark"] .marquee-wrap {
+  background: #1d1530;
+}
+
+html[data-theme="dark"] .contact-block {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+}
+
+html[data-theme="dark"] .term {
+  border-color: var(--ink);
+}
+
+html[data-theme="dark"] .term-bar {
+  background: #241b38;
+  border-bottom-color: var(--ink);
+}
+
+/* teks tag proyek dibikin lebih terang biar kebaca */
+html[data-theme="dark"] [style*="color:#8a6300"] { color: #ffd36b !important; }
+html[data-theme="dark"] [style*="color:#007580"] { color: #5fe6ef !important; }
+html[data-theme="dark"] [style*="color:#c81158"] { color: #ff7aac !important; }
+html[data-theme="dark"] [style*="color:#5b2bd6"] { color: #b896ff !important; }
+
+
+/* ===== Tombol ganti mode ===== */
+.theme-btn {
+  width: 34px;
+  height: 34px;
+  margin-left: 6px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.theme-btn:hover {
+  transform: translate(-1px, -1px) rotate(-12deg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.theme-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+/* transisi halus cuma pas tombol diklik */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition: background-color .4s, color .4s, border-color .4s, box-shadow .4s !important;
+}
